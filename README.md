@@ -1,6 +1,7 @@
 # React + Vite
 
-DEMO- flicknests.netlify.app
+
+[Live Demo] flicknests.netlify.app
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
