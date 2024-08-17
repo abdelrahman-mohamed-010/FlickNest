@@ -1,0 +1,143 @@
+.categories {
+  position: relative;
+  padding: 16px 40px;
+  min-height: 100vh;
+  .btn-holder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px 0;
+  }
+
+  .category-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #555;
+    }
+
+    &.active {
+      background-color: #e50914;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .movie-item {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .movie-poster {
+      width: 140px;
+      min-height: 180px;
+      object-fit: cover;
+      margin-right: 20px;
+      border-radius: 5px;
+    }
+
+    .movie-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h2 {
+        margin: 20px 0 10px;
+        color: white;
+      }
+
+      p {
+        margin: 15px 0;
+        color: #777;
+      }
+    }
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 0 5px;
+
+      a {
+        display: inline-block;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: #333;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          background-color: #e50914;
+          color: #fff;
+        }
+      }
+
+      &.active a {
+        background-color: #e50914;
+        color: #fff;
+      }
+    }
+  }
+  .loading-spinner {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #e50914;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 46%;
+    right: 52%;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

@@ -1,0 +1,65 @@
+.watchlist-container {
+  background-color: #111;
+  color: #fff;
+  padding: 16px 40px;
+  min-height: 100vh;
+  animation: fadeIn 0.5s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .watchlist-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .movie-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .deleteModal {
+    background-color: #655756;
+    background-color: #a1a1a1;
+    padding: 20px;
+    color: #000000;
+    h2 {
+      margin-bottom: 20px;
+      text-transform: capitalize;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: space-between;
+      text-transform: capitalize;
+
+      .delete {
+        cursor: pointer;
+        padding: 10px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: rgb(135, 100, 100);
+        }
+      }
+      .close {
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover {
+          color: rgb(135, 100, 100);
+        }
+      }
+    }
+  }
+}

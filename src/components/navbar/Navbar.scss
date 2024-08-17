@@ -1,0 +1,115 @@
+@import "../../responsive.scss";
+
+.navbar {
+  background-color: #111;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+    @include sm {
+      padding: 8px; 
+    }
+  
+
+  .left {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+
+    @include md {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 300px;
+      padding: 20px;
+      right: 0;
+      width: 100%;
+      background: linear-gradient(rgba(1, 1, 1, 0.751), rgba(1, 1, 1, 0.751) 70%, rgba(1, 1, 1, 0) 100%);
+      z-index: 3;
+      justify-content: center;
+      border-radius: 10px;
+
+      &.icon-open {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .navbar-brand {
+      .navbar-title {
+        font-size: 1.8rem;
+        color: red;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        @include md {
+          display: none;
+        }
+      }
+    }
+
+    .navbar-menu {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      @include md {
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        align-items: center;
+      }
+
+      .navbar-item {
+        margin-right: 1.5rem;
+
+        @include md {
+          margin: 13px 0;
+        }
+
+        .navbar-link {
+          text-decoration: none;
+          color: #fff;
+          transition: color 0.3s ease;
+          text-transform: uppercase;
+          text-wrap: nowrap;
+
+          @include md {
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+
+          &:hover {
+            color: red;
+          }
+          &.active {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+
+  .icon {
+    display: none;
+    color: white;
+    cursor: pointer;
+    z-index: 3000;
+
+    @include md {
+      display: block;
+    }
+
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+

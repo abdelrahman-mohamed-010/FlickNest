@@ -1,0 +1,61 @@
+.movie-container {
+  position: relative;
+  background-color: #1f1f1f;
+  .movie-item {
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+
+    .movie-image {
+      min-width: 140px;
+      height: 180px;
+      object-fit: cover;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    .movie-details {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .movie-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: white;
+      }
+
+      .movie-description {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 15px;
+        color: #757575;
+        line-height: 1.4;
+      }
+
+      .movie-info {
+        color: #757575;
+      }
+    }
+  }
+  svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    color: #757575;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #f44336;
+    }
+  }
+}
