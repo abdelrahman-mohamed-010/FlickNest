@@ -1,7 +1,7 @@
 .watchlist-container {
-  background-color: #111;
-  color: #fff;
-  padding: 16px 40px;
+  background-color: white;
+  padding: 4px 10px;
+  color: #000000;
   min-height: 100vh;
   animation: fadeIn 0.5s ease-in-out;
 
@@ -16,26 +16,43 @@
     }
   }
 
+  .no-movies {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 60px;
+    color: #777;
+  }
+
   .watchlist-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 36px;
+    text-align: center;
     text-transform: uppercase;
+    color: #324252;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   .movie-list {
+    background-color: white;
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
   .deleteModal {
-    background-color: #655756;
-    background-color: #a1a1a1;
+    background-color: #f0f0f0;
     padding: 20px;
     color: #000000;
+
     h2 {
       margin-bottom: 20px;
       text-transform: capitalize;
+      color: #1a73e8;
     }
 
     .btns {
@@ -47,17 +64,20 @@
         cursor: pointer;
         padding: 10px;
         transition: all 0.2s ease;
+        color: #d32f2f;
 
         &:hover {
-          color: rgb(135, 100, 100);
+          color: #9b1c1c;
         }
       }
+
       .close {
         padding: 10px;
         cursor: pointer;
+        color: #1a73e8;
 
         &:hover {
-          color: rgb(135, 100, 100);
+          color: #1558b3;
         }
       }
     }

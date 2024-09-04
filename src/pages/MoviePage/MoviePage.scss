@@ -1,30 +1,41 @@
+@import "../../app.scss";
+@import "../../responsive.scss";
+@import "../../components/movieList/MovieList.scss";
+
 .movie-page {
-  color: white;
-  background-color: #111;
+  color: #111;
+  background: linear-gradient(to bottom, #f9f9f9 98%, white 100%);
   font-family: Arial, sans-serif;
   padding: 16px 40px;
-  min-height: 100vh; // Ensure it takes up the full viewport height
+  min-height: 100vh;
   box-sizing: border-box;
   opacity: 0;
-  visibility: hidden; // Initially hide the content
-  transition: opacity 0.5s ease-in-out, visibility 0s 0.5s; // Fade-in with a delay for visibility
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0s 0.2s;
+
+  @include respond-to("phone") {
+    padding: 8px 20px;
+  }
 
   &.fade-in {
     opacity: 1;
-    visibility: visible; // Make content visible after fade-in
-    transition: opacity 0.5s ease-in-out; // Only transition opacity after fade-in
+    visibility: visible;
+    transition: opacity 0.2s ease-in-out;
   }
 
   .movie-details {
     margin-top: 40px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
     .movie-info {
       display: flex;
       gap: 20px;
       justify-content: space-between;
       align-items: flex-start;
+
+      @include md {
+        flex-direction: column-reverse;
+      }
 
       .text-content {
         flex: 1;
@@ -33,26 +44,47 @@
         .movie-title {
           font-size: 2rem;
           margin-bottom: 10px;
+          color: #007bff;
+
+          @include sm {
+            font-size: 26px;
+          }
         }
 
         .movie-description {
           font-size: 1.2rem;
           margin-bottom: 20px;
           line-height: 1.5;
+          color: #333;
+
+          @include sm {
+            font-size: 12px;
+          }
         }
 
         .date {
           margin: 30px 0 10px;
-          color: #b6b2b2;
+          color: #666;
+
+          @include sm {
+            font-size: 14px;
+          }
         }
 
         .pop {
-          color: #b6b2b2;
+          color: #666;
+          @include sm {
+            font-size: 14px;
+          }
         }
       }
 
       .movie-trailer {
         flex: 2;
+
+        @include md {
+          width: 100%;
+        }
 
         iframe {
           width: 100%;
@@ -60,6 +92,16 @@
           border: none;
           border-radius: 10px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+          @include md {
+            height: 460px;
+          }
+          @include sm {
+            height: 300px;
+          }
+          @include respond-to("phone") {
+            height: 240px;
+          }
         }
       }
     }
@@ -67,36 +109,70 @@
     .movie-actors {
       margin: 60px 0 40px;
 
+      @include respond-to("tablet") {
+        display: none;
+      }
+
       h2 {
         margin-bottom: 20px;
-        color: white;
+        color: #007bff;
         font-weight: bold;
         text-transform: uppercase;
       }
+    }
 
-      .actor {
-        width: 100%;
+    .movie-list-phone {
+      h2 {
+        color: #007bff;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .actors-phone {
+        display: flex;
+        gap: 20px;
+        overflow: auto;
+      }
 
-        .image {
-          width: 100%;
-
-          img {
-            border-radius: 50%;
-            margin: 0 auto;
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-            margin-bottom: 18px;
-          }
-        }
-
-        .actor-name {
-          width: 100%;
-          text-align: center;
-        }
+      .actors-phone::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+      }
+      .actors-phone::-webkit-scrollbar-thumb {
+        background: transparent;
       }
     }
 
+    .actor {
+      width: 100%;
+
+      .image {
+        width: 100%;
+
+        img {
+          border-radius: 50%;
+          margin: 0 auto;
+          width: 140px;
+          height: 140px;
+          object-fit: cover;
+          margin-bottom: 18px;
+
+          @include respond-to("phone") {
+            width: 80px;
+            height: 80px;
+          }
+        }
+      }
+
+      .actor-name {
+        width: 100%;
+        text-align: center;
+        color: #333;
+
+        @include respond-to("phone") {
+          font-size: 14px;
+        }
+      }
+    }
     .movie-actors,
     .related-movies {
       .slick-slide {
@@ -116,26 +192,32 @@
 
         &:before {
           font-size: 30px;
-          color: white;
+          color: #111;
         }
       }
+
       .slick-prev {
         left: -34px;
       }
+
       .slick-next {
         right: -38px;
       }
     }
 
     .related-movies {
+      @include respond-to("tablet") {
+        display: none;
+      }
+
       h2 {
         margin-bottom: 20px;
       }
     }
 
     .watchlist-btn {
-      background-color: #f5c518;
-      color: #111;
+      background-color: #007bff;
+      color: #fff;
       border: none;
       margin-top: 20px;
       padding: 10px 20px;
@@ -145,7 +227,7 @@
       transition: background-color 0.3s ease, opacity 0.3s ease;
 
       &:hover {
-        background-color: #e0b80a;
+        background-color: #0056b3;
       }
 
       &:disabled {
@@ -153,6 +235,11 @@
         color: #ccc;
         cursor: not-allowed;
         opacity: 0.7;
+      }
+
+      @include sm {
+        padding: 10px 10px;
+        font-size: 14px;
       }
     }
 

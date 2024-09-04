@@ -8,7 +8,7 @@ function Categories() {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const apiKey = import.meta.env.VITE_KEY;
   const location = useLocation();
@@ -126,7 +126,19 @@ function Categories() {
       </div>
 
       {loading ? (
-        <div className="loading-spinner"></div>
+        <div className="loading-container">
+          <div className="skeleton-loader">
+            {[...Array(5)].map((_, index) => (
+              <div key={index} className="skeleton-item">
+                <div className="skeleton-poster"></div>
+                <div className="skeleton-details">
+                  <div className="skeleton-title"></div>
+                  <div className="skeleton-overview"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <>
           <ul>
@@ -151,20 +163,26 @@ function Categories() {
               </Link>
             ))}
           </ul>
-          s
-          <ReactPaginate
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
-            breakLabel={"..."}
-            breakClassName={"break-me"}
-            pageCount={totalPages}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageChange}
-            containerClassName={"pagination"}
-            activeClassName={"active"}
-            forcePage={currentPage - 1}
-          />
+
+          {totalPages > 1 && (
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              breakLabel={"..."}
+              pageCount={totalPages}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+              forcePage={currentPage - 1}
+              pageClassName={"page-item"}
+              previousClassName={"prev-item"}
+              nextClassName={"next-item"}
+              breakClassName={"break-item"}
+              disabledClassName={"disabled-item"}
+            />
+          )}
         </>
       )}
     </div>

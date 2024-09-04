@@ -1,14 +1,19 @@
+@import "../../app.scss";
+
 .movie-container {
   position: relative;
-  background-color: #1f1f1f;
+
   .movie-item {
     text-decoration: none;
     display: flex;
     width: 100%;
-
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-right: 20px;
+    background-color: #f9f9f9;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
     .movie-image {
       min-width: 140px;
@@ -16,6 +21,11 @@
       object-fit: cover;
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
+
+      @include respond-to("phone") {
+        height: 140px;
+        min-width: 100px;
+      }
     }
 
     .movie-details {
@@ -27,33 +37,57 @@
       .movie-title {
         font-size: 18px;
         margin-bottom: 10px;
-        color: white;
+        color: #4c6686e4;
+    
+
+        @include respond-to("phone") {
+          margin-bottom: 0;
+          font-size: 16px;
+        }
       }
 
       .movie-description {
         font-size: 14px;
         line-height: 1.4;
         margin-bottom: 15px;
-        color: #757575;
-        line-height: 1.4;
+        color: #777;
+
+        @include respond-to("phone") {
+          font-size: 12px;
+          line-height: 1.3;
+          margin: 10px 0;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 4;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .movie-info {
-        color: #757575;
+        color: #555;
+        font-size: 10px;
       }
     }
   }
+
   svg {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
     cursor: pointer;
     width: 30px;
     height: 30px;
     margin: 10px;
-    color: #757575;
+    color: #4c6686e4;
     transition: color 0.3s ease;
 
+    @include respond-to("phone") {
+      width: 20px;
+      height: 20px;
+      top: 0;
+      right: 0;
+    }
     &:hover {
       color: #f44336;
     }

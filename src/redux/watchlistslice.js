@@ -14,7 +14,6 @@ const watchlistSlice = createSlice({
       const movieId = action.payload;
       state.movies = state.movies.filter((movie) => movie.id !== movieId);
     },
-    
   },
 });
 

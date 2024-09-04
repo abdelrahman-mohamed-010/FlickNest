@@ -1,17 +1,33 @@
+@import "../../app.scss";
+
 .movie-list {
   margin: 20px 0;
   padding: 16px 40px;
 
+  @include respond-to("phone") {
+    padding: 4px 10px;
+    display: none;
+  }
+
   h2 {
     margin-left: 20px;
     margin-bottom: 10px;
-    color: white;
+    color: #4e4c4c;
     font-weight: bold;
     text-transform: uppercase;
+
+    @include respond-to("phone") {
+      font-size: 20px;
+      margin-left: 0;
+    }
   }
 
   .slick-slide {
     padding: 0 10px;
+
+    @include respond-to("phone") {
+      padding: 0;
+    }
   }
 
   .slick-prev,
@@ -27,13 +43,56 @@
 
     &:before {
       font-size: 30px;
-      color: white;
+      color: #333;
     }
   }
+
   .slick-prev {
     left: -34px;
   }
   .slick-next {
     right: -38px;
+  }
+}
+
+.movie-list-phone {
+  padding: 4px 10px;
+  margin-top: 20px;
+  display: none;
+
+  &.related {
+    margin-top: 0;
+
+    .movies-phone {
+      margin: 0;
+    }
+  }
+
+  @include respond-to("phone") {
+    display: block;
+  }
+
+  h2 {
+    color: #4e4c4c;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .movies-phone {
+    margin: 4px 10px;
+    display: flex;
+    gap: 10px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .phoneMovieImg {
+    width: 100px;
+    height: 140px;
+    border-radius: 8px;
   }
 }

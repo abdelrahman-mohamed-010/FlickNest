@@ -1,53 +1,28 @@
 @import "../../responsive.scss";
 
 .navbar {
-  background-color: #111;
+  background-color: #ffffff;
   padding: 16px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
-    @include sm {
-      padding: 8px; 
-    }
-  
+  border-bottom: 1px solid #ddd;
+
+  @include sm {
+    padding: 8px 20px;
+  }
 
   .left {
     display: flex;
     gap: 60px;
     align-items: center;
 
-    @include md {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 300px;
-      padding: 20px;
-      right: 0;
-      width: 100%;
-      background: linear-gradient(rgba(1, 1, 1, 0.751), rgba(1, 1, 1, 0.751) 70%, rgba(1, 1, 1, 0) 100%);
-      z-index: 3;
-      justify-content: center;
-      border-radius: 10px;
-
-      &.icon-open {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-
     .navbar-brand {
       .navbar-title {
         font-size: 1.8rem;
-        color: red;
         font-weight: bold;
-        text-transform: uppercase;
+        color: #559ebb;
         letter-spacing: 1px;
-
-        @include md {
-          display: none;
-        }
       }
     }
 
@@ -58,37 +33,25 @@
       padding: 0;
 
       @include md {
-        flex-direction: column;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        align-items: center;
+        display: none;
       }
 
       .navbar-item {
         margin-right: 1.5rem;
 
-        @include md {
-          margin: 13px 0;
-        }
-
         .navbar-link {
           text-decoration: none;
-          color: #fff;
+          color: #007bff;
           transition: color 0.3s ease;
           text-transform: uppercase;
-          text-wrap: nowrap;
-
-          @include md {
-            font-size: 1.5rem;
-            font-weight: bold;
-          }
+          white-space: nowrap;
 
           &:hover {
-            color: red;
+            color: #0056b3;
           }
+
           &.active {
-            color: red;
+            color: #0056b3;
           }
         }
       }
@@ -97,7 +60,8 @@
 
   .icon {
     display: none;
-    color: white;
+    color: #559ebb;
+
     cursor: pointer;
     z-index: 3000;
 
@@ -110,6 +74,63 @@
       height: 36px;
     }
   }
+
+  .search {
+    @include md {
+      display: none;
+    }
+  }
 }
 
+.mobile {
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px 40px;
+  display: none;
+  padding: 0 40px;
 
+  &.active {
+    max-height: 500px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+  }
+
+  padding: 0 20px;
+
+  .mobile-search {
+    margin-top: 20px;
+  }
+
+  .navbar-menu {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 10px 0;
+
+    .navbar-item {
+      margin-right: 1.5rem;
+      padding: 6px 0;
+
+      .navbar-link {
+        text-decoration: none;
+        transition: color 0.3s ease;
+        text-transform: uppercase;
+        white-space: nowrap;
+        color: #206dbf;
+        font-weight: bold;
+        letter-spacing: 1.1px;
+        padding: 10px 0;
+
+        &:hover {
+          color: #16508d;
+        }
+
+        &.active {
+          color: #16508d;
+        }
+      }
+    }
+  }
+}

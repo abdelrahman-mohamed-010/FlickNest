@@ -29,7 +29,12 @@ function Movie({ movie }) {
 
   return (
     <div className="movie">
-      <img className="imgMovie" src={imageUrl} alt={movie.title} />
+      <img
+        className="imgMovie"
+        src={imageUrl}
+        alt={movie.title}
+        loading="lazy"
+      />
       <div className="movie-info">
         <h3>{movie.title}</h3>
         <p>{movie.overview}</p>
@@ -63,4 +68,3 @@ function Movie({ movie }) {
 }
 
 export default Movie;
-
