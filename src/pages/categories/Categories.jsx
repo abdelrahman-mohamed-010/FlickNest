@@ -18,10 +18,7 @@ function Categories() {
   const currentPage = parseInt(queryParams.get("page")) || 1;
   const categ = queryParams.get("categ") || "";
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
-
+  //  fetch genres
   useEffect(() => {
     const fetchGenres = async () => {
       try {
@@ -40,6 +37,7 @@ function Categories() {
     fetchGenres();
   }, [apiKey]);
 
+  //  fetch movies
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
@@ -67,11 +65,15 @@ function Categories() {
     fetchMovies();
   }, [apiKey, currentPage, selectedGenres]);
 
+  // Update selected genres and URL when category changes
   useEffect(() => {
     const genreArray = categ.split(",").map(Number).filter(Boolean);
     setSelectedGenres(genreArray);
+    updateUrl(1, genreArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categ]);
 
+  // Update URL with new page and genre selections
   const updateUrl = useCallback(
     (page, genres) => {
       const url = new URLSearchParams();
@@ -88,6 +90,7 @@ function Categories() {
         ? prevSelected.filter((id) => id !== genreId)
         : [...prevSelected, genreId];
 
+      // Reset page number to 1 when filters change
       updateUrl(1, updatedGenres);
       return updatedGenres;
     });
@@ -96,6 +99,7 @@ function Categories() {
   const handlePageChange = ({ selected }) => {
     const newPage = selected + 1;
     updateUrl(newPage, selectedGenres);
+    window.scrollTo(0, 0); // Scroll to top on page change
   };
 
   const isSelected = (genreId) => selectedGenres.includes(genreId);
