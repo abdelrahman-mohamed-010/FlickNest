@@ -3,52 +3,41 @@ import { Link } from "react-router-dom";
 import "./Home.scss";
 import MovieList from "../../components/movieList/MovieList";
 import { PlayArrow } from "@mui/icons-material";
+import { fetchMoviesByCategory} from "../../util/http";
+import { useQuery } from "react-query";
 
 function Home() {
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [popularMovies, setPopularMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [featuredMovie, setFeaturedMovie] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  const apiKey = import.meta.env.VITE_KEY;
-  const topRatedUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=5`;
-  const popularUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=8`;
-  const upcomingUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=3`;
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const [topRatedResponse, popularResponse, upcomingResponse] =
-          await Promise.all([
-            fetch(topRatedUrl).then((response) => response.json()),
-            fetch(popularUrl).then((response) => response.json()),
-            fetch(upcomingUrl).then((response) => response.json()),
-          ]);
-
-        setTopRatedMovies(topRatedResponse.results);
-        setPopularMovies(popularResponse.results);
-        setUpcomingMovies(upcomingResponse.results);
-
-        if (popularResponse.results.length > 0) {
-          const randomMovie =
-            popularResponse.results[
-              Math.floor(Math.random() * popularResponse.results.length)
-            ];
-          setFeaturedMovie(randomMovie);
-        }
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-      }
-    };
-
-    fetchMovies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [featuredMovie, setFeaturedMovie] = useState(null);
 
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+
+  const { data: topRatedMovies = [] } = useQuery({
+    queryKey: ["topRatedMovies"],
+    queryFn: () => fetchMoviesByCategory("top_rated"),
+    staleTime: 1000 * 60 * 5,
+  });
+  const { data: popularMovies = [] } = useQuery({
+    queryKey: ["popularMovies"],
+    queryFn: () => fetchMoviesByCategory("popular"),
+    staleTime: 1000 * 60 * 5,
+  });
+  const { data: upcomingMovies = [] } = useQuery({
+    queryKey: ["upcomingMovies"],
+    queryFn: () => fetchMoviesByCategory("upcoming"),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  useEffect(() => {
+    if (popularMovies.length > 0) {
+      const randomIndex = Math.floor(Math.random() * popularMovies.length);
+      setFeaturedMovie(popularMovies[randomIndex]);
+    } else {
+      setFeaturedMovie(null);
+    }
+  }, [popularMovies]);
 
   return (
     <div className="home">
