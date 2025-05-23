@@ -3,16 +3,17 @@
 .movie {
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
-  margin: 10px;
-  transition: transform 0.3s ease-in-out;
+  border-radius: 4px; /* Netflix uses sharper corners */
+  margin: 0; /* Margin will be handled by slick-slide padding */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   text-decoration: none;
-  background: #f0f4f8;
+  background: #181818; /* Darker background for movie items */
+  cursor: pointer;
 
   img {
     width: 100%;
-    height: 280px;
-    border-radius: 10px;
+    height: 280px; /* Keep this or adjust as needed */
+    border-radius: 4px 4px 0 0; /* Rounded top corners */
     transition: transform 0.3s ease-in-out;
 
     @include respond-to("tablet") {
@@ -25,23 +26,24 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.8);
-    color: #333;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); /* Gradient for info overlay */
+    color: #fff; /* White text */
     padding: 10px;
     transform: translateY(100%);
-    transition: transform 0.3s ease-in-out;
-    opacity: 1;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0; /* Hidden by default */
     display: flex;
     flex-direction: column;
     font-size: 14px;
 
     h3 {
-      margin: 0;
-      font-size: 14px;
+      margin: 0 0 5px 0;
+      font-size: 1rem; /* Adjusted font size */
+      font-weight: 500;
     }
 
     p {
-      font-size: 12px;
+      font-size: 0.75rem; /* Adjusted font size */
       margin: 10px 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -57,42 +59,55 @@
 
       .trailer-btn,
       .watch-btn {
-        background: #007bff;
-        border: none;
-        padding: 8px 16px;
+        background: rgba(51, 51, 51, 0.7); /* Semi-transparent dark buttons */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 6px 12px; /* Adjusted padding */
         text-decoration: none;
         flex: 1;
-        width: 50%;
-        border-radius: 5px;
-
+        min-width: 45%; /* Ensure buttons don't get too small */
+        border-radius: 4px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 0.8rem; /* Adjusted font size */
         color: white;
-        transition: background 0.3s ease-in-out;
+        transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
         display: flex;
         align-items: center;
+        justify-content: center; /* Center button content */
         gap: 5px;
 
         &:hover {
-          background: #0056b3;
+          background: rgba(65, 65, 65, 0.9); /* Slightly lighter on hover */
+          border-color: rgba(255, 255, 255, 0.5);
         }
 
         svg {
-          width: 20px;
-          height: 20px;
+          width: 18px; /* Adjusted icon size */
+          height: 18px;
+        }
+      }
+      .watch-btn {
+        .icon {
+          display: flex;
+          align-items: center;
+        }
+        .added {
+          color: #e50914; /* Netflix red for added icon */
         }
       }
     }
   }
 
   &:hover {
+    transform: scale(1.05); /* Slight zoom on hover for the whole card */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+    z-index: 10; /* Bring to front */
     img {
-      transform: scale(1.1);
+      // transform: scale(1.1); // Keep or remove if zoom is on the whole card
     }
 
     .movie-info {
       transform: translateY(0);
-      opacity: 1;
+      opacity: 1; /* Show info on hover */
     }
   }
 }

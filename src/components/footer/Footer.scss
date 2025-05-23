@@ -1,17 +1,55 @@
 .footer {
-  background-color: #ffffff;
-  color: #111;
-  padding: 1rem;
-  text-align: center;
+  background-color: #141414; /* Dark background */
+  color: #808080; /* Light gray text color */
+  padding: 2rem 1rem 3rem; /* Increased padding, especially at the bottom */
   font-size: 0.9rem;
   width: 100%;
 
   .footer-content {
-    max-width: 1200px;
+    max-width: 980px; /* Netflix uses a slightly narrower content width for footer */
     margin: 0 auto;
+    text-align: left; /* Align text to the left for links */
+  }
+
+  .footer-social-icons {
+    margin-bottom: 1em;
+    svg {
+      margin-right: 1.5em;
+      font-size: 24px; /* Adjust icon size */
+      cursor: pointer;
+      &:hover {
+        color: #ffffff; /* White on hover */
+      }
+    }
+  }
+
+  .footer-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 1em 0;
+    display: flex;
+    flex-wrap: wrap; // Allow links to wrap to the next line
+
+    li {
+      width: 25%; /* Four columns of links */
+      margin-bottom: 16px;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
+      a {
+        text-decoration: none;
+        color: #808080;
+        font-size: 13px;
+
+        &:hover {
+          color: #ffffff; /* White on hover */
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   .footer-text {
-    margin: 0;
+    margin: 20px 0 0; /* Add some space above the copyright text */
+    font-size: 11px;
   }
 }

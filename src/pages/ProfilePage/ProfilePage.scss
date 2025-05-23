@@ -1,0 +1,67 @@
+.profile-page-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); // Assuming navbar and footer height
+  color: #e5e5e5;
+  font-size: 1.2rem;
+}
+
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Align items to the top
+  min-height: calc(100vh - 120px); // Adjust based on navbar and footer height
+  padding: 40px 20px; // Added more padding
+  background-color: #141414; // From app.scss
+  color: #fff;
+
+  .profile-container {
+    background-color: rgba(0, 0, 0, 0.75); // Netflix-style form background
+    padding: 40px 60px; // Adjusted padding
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 600px; // Increased max-width for profile details
+    text-align: left; // Align text to the left
+
+    h1 {
+      margin-bottom: 30px; // Increased margin
+      font-size: 2.2rem; // Slightly larger title
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .profile-info {
+      margin-bottom: 30px;
+      font-size: 1.1rem; // Slightly larger font for info
+
+      p {
+        margin-bottom: 15px; // Spacing between info lines
+        line-height: 1.6;
+
+        strong {
+          color: #b3b3b3; // Lighter color for labels
+        }
+      }
+    }
+
+    .logout-button-profile {
+      padding: 12px 25px; // Adjusted padding
+      border-radius: 4px;
+      border: none;
+      background-color: #e50914; // Netflix red
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      width: auto; // Auto width based on content
+      display: inline-block; // To allow auto width
+
+      &:hover {
+        background-color: #f6121d; // Darker red on hover
+      }
+    }
+  }
+}
