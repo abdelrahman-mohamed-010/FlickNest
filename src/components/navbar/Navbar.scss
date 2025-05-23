@@ -1,12 +1,12 @@
 @import "../../responsive.scss";
 
 .navbar {
-  background-color: #ffffff;
+  background-color: #141414; /* Match body background or make it slightly different if needed */
   padding: 16px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #333; /* Darker border */
 
   @include sm {
     padding: 8px 20px;
@@ -21,7 +21,7 @@
       .navbar-title {
         font-size: 1.8rem;
         font-weight: bold;
-        color: #559ebb;
+        color: #e50914; /* Netflix red for brand */
         letter-spacing: 1px;
       }
     }
@@ -41,32 +41,63 @@
 
         .navbar-link {
           text-decoration: none;
-          color: #007bff;
+          color: #e5e5e5; /* Lighter text for links */
           transition: color 0.3s ease;
           text-transform: uppercase;
           white-space: nowrap;
+          font-size: 0.9rem;
+          font-weight: 500;
 
           &:hover {
-            color: #0056b3;
+            color: #b3b3b3; /* Slightly darker on hover */
           }
 
           &.active {
-            color: #0056b3;
+            color: #ffffff; /* White for active link */
+            font-weight: bold;
           }
         }
       }
     }
   }
 
+  .right-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px; // Space between search, auth links, and menu icon
+
+    .search-desktop {
+      @include md {
+        display: none; // Hide desktop search on medium screens where mobile menu icon appears
+      }
+    }
+
+    .auth-links {
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      gap: 15px; // Space between auth links
+
+      @include md {
+        display: none; // Hide auth links here for medium screens, they'll be in the mobile slide-out
+      }
+
+      .navbar-item {
+        margin-right: 0; // Remove default margin-right as gap is used
+      }
+    }
+  }
+
   .icon {
     display: none;
-    color: #559ebb;
-
+    color: #e5e5e5; /* Lighter icon color */
     cursor: pointer;
     z-index: 3000;
 
     @include md {
-      display: block;
+      display: block; // Show menu icon on medium screens
     }
 
     svg {
@@ -75,9 +106,56 @@
     }
   }
 
-  .search {
-    @include md {
-      display: none;
+  // Remove the old .search rule as it's now .search-desktop inside .right-menu
+  // .search {
+  //   @include md {
+  //     display: none;
+  //   }
+  // }
+
+  // Button styles
+  .navbar-button {
+    background-color: transparent;
+    color: #e5e5e5;
+    padding: 8px 16px;
+    border: 1px solid transparent; // For alignment, can be made visible if needed
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+    &:hover {
+      color: #ffffff;
+    }
+
+    &.signup-button {
+      background-color: #e50914; // Netflix red
+      color: #ffffff;
+      border-color: #e50914;
+      &:hover {
+        background-color: #f6121d; // Darker red on hover
+        border-color: #f6121d;
+      }
+    }
+
+    &.logout-button {
+      // Can add specific styles for logout if different from default navbar-link
+      // For now, it will inherit general navbar-link look if used as <button class="navbar-link">
+      // Or, if it's a button styled like a link:
+      padding: 0; // Reset padding if it's meant to look exactly like a link
+      border: none;
+      svg {
+        font-size: 1.2rem; // Adjust icon size if needed
+      }
+      &:hover {
+        // color: #b3b3b3;
+      }
     }
   }
 }
@@ -92,7 +170,8 @@
 
   &.active {
     max-height: 500px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #333; /* Darker border for mobile menu */
+    background-color: #141414; /* Ensure mobile menu has dark background */
     display: flex;
   }
 
@@ -118,17 +197,44 @@
         transition: color 0.3s ease;
         text-transform: uppercase;
         white-space: nowrap;
-        color: #206dbf;
+        color: #e5e5e5; /* Lighter text for mobile links */
         font-weight: bold;
         letter-spacing: 1.1px;
         padding: 10px 0;
+        display: flex; // For aligning icons in mobile if any
+        align-items: center;
 
         &:hover {
-          color: #16508d;
+          color: #b3b3b3; /* Slightly darker on hover */
         }
 
         &.active {
-          color: #16508d;
+          color: #ffffff; /* White for active link */
+        }
+
+        svg { // For icons next to links in mobile if any (like profile)
+            margin-right: 8px;
+        }
+      }
+
+      // Ensure mobile buttons also get styled
+      .navbar-button {
+        width: 100%; // Make buttons full width in mobile menu
+        justify-content: flex-start; // Align text to left
+        padding: 10px 0; // Match link padding
+        margin-top: 5px;
+        margin-bottom: 5px;
+
+        &.signup-button {
+          margin-left: 0; // Override potential desktop margin
+        }
+        &.logout-button {
+          color: #e5e5e5;
+          background: transparent;
+          border: none;
+          &:hover {
+            color: #b3b3b3;
+          }
         }
       }
     }

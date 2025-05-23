@@ -19,14 +19,19 @@
     border-radius: 0.25rem;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border: none;
-    background-color: #f0f0f0;
-    color: #007bff;
+    border: 1px solid #333; /* Dark border */
+    background-color: #222; /* Dark background for search input */
+    color: #fff; /* White text */
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    &::placeholder {
+      color: #888; /* Lighter placeholder text */
+    }
 
     &:focus {
-      background-color: #e0e0e0;
+      background-color: #333; /* Slightly lighter on focus */
+      border-color: #555;
       outline: none;
     }
   }
@@ -35,14 +40,19 @@
     position: absolute;
     right: 0.5rem;
     font-size: 1.25rem;
-    color: #007bff;
+    color: #888; /* Lighter close icon */
     cursor: pointer;
+    &:hover {
+      color: #fff;
+    }
   }
 
   .list {
-    color: #007bff;
-    background-color: #ffffff;
+    color: #fff; /* White text for list items */
+    background-color: #181818; /* Dark background for list */
     position: absolute;
+    border: 1px solid #333; /* Dark border for list */
+    border-top: none; /* Remove top border as it's connected to input */
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
     right: 0;
@@ -51,7 +61,7 @@
     z-index: 1000;
     max-height: 348px;
     overflow-y: scroll;
-    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
 
     .movie {
       display: flex;
@@ -72,15 +82,16 @@
         flex-direction: column;
         justify-content: space-around;
         text-decoration: none;
-        color: rgb(50, 58, 118);
+        color: #e5e5e5; /* Lighter text for movie details in list */
 
         .title {
           font-weight: bold;
+          color: #fff; /* White title */
           font-size: 13px;
         }
 
         .scnd {
-          color: #777;
+          color: #aaa; /* Lighter secondary text */
           font-size: 14px;
 
           .date {
@@ -96,13 +107,13 @@
   }
 
   .list::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 123, 255);
+    background-color: #555; /* Darker scrollbar thumb */
     border-radius: 4px;
   }
 
   .list::-webkit-scrollbar-track {
     margin: 14px 0;
-    background: #f0f0f0;
+    background: #222; /* Darker scrollbar track */
     border-radius: 4px;
   }
 }
