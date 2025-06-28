@@ -5,8 +5,8 @@ import "./MoviePage.scss";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Movie from "../../components/movie/Movie";
-import { useDispatch, useSelector } from "react-redux";
-import { addToWatchlist } from "../../redux/watchlistslice";
+import { useAuth } from "../../hooks/useAuth.jsx";
+import { useWatchlist } from "../../hooks/useWatchlist";
 
 function MoviePage() {
   const [movie, setMovie] = useState(null);
@@ -16,8 +16,8 @@ function MoviePage() {
   const [isWatchlisted, setIsWatchlisted] = useState(false);
   const [showContent, setShowContent] = useState(false);
 
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => state.watchlist.movies);
+  const { user } = useAuth();
+  const { watchlist, addToWatchlist, loading: watchlistLoading } = useWatchlist();
   const { id } = useParams();
   const apiKey = import.meta.env.VITE_KEY;
 
@@ -72,16 +72,27 @@ function MoviePage() {
   }, [id, apiKey]);
 
   useEffect(() => {
-    if (movie) {
-      const isWatchlisted = movies.some((m) => m.id === movie.id);
+    if (movie && watchlist) {
+      const isWatchlisted = watchlist.some((m) => m.movie_id === parseInt(movie.id));
       setIsWatchlisted(isWatchlisted);
     }
-  }, [movies, movie]);
+  }, [watchlist, movie]);
 
-  const handleAddToWatchlist = () => {
-    if (!isWatchlisted) {
-      dispatch(addToWatchlist(movie));
-      setIsWatchlisted(true);
+  const handleAddToWatchlist = async () => {
+    if (!isWatchlisted && movie && user) {
+      try {
+        await addToWatchlist({
+          movie_id: movie.id,
+          movie_title: movie.title,
+          movie_poster_path: movie.poster_path,
+          movie_overview: movie.overview,
+          movie_release_date: movie.release_date,
+          movie_popularity: movie.popularity
+        });
+        setIsWatchlisted(true);
+      } catch (error) {
+        console.error("Error adding to watchlist:", error);
+      }
     }
   };
 
@@ -182,13 +193,15 @@ function MoviePage() {
               ></iframe>
             </div>
           </div>
-          <button
-            className={`watchlist-btn ${isWatchlisted ? "added" : ""}`}
-            onClick={handleAddToWatchlist}
-            disabled={isWatchlisted}
-          >
-            {isWatchlisted ? "Added to Watchlist" : "Add to Watchlist"}
-          </button>
+          {user && (
+            <button
+              className={`watchlist-btn ${isWatchlisted ? "added" : ""}`}
+              onClick={handleAddToWatchlist}
+              disabled={isWatchlisted || watchlistLoading}
+            >
+              {isWatchlisted ? "Added to Watchlist" : "Add to Watchlist"}
+            </button>
+          )}
           {actors.length > 0 && (
             <>
               <div className="movie-actors">

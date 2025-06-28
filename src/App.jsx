@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AuthProvider } from "./hooks/useAuth";
+import { AuthProvider } from "./hooks/useAuth.jsx";
 import Layout from "./pages/layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./app.scss";
