@@ -1,220 +1,172 @@
 @import "../../app.scss";
 
 .home {
-  background: linear-gradient(to bottom, #f9f9f9 98%, white 100%);
- .featured-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(70%);
-  z-index: 1;
-  border: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  background-color: #141414;
 
-  &.loaded {
-    opacity: 1;
-  }
-}
-
-  .featured {
+  .hero-section {
     position: relative;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
     overflow: hidden;
 
-    .featured-image-container {
-      position: relative;
+    @media (max-width: 768px) {
+      height: 70vh;
+    }
+
+    .hero-image-container {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
 
-      .featured-image {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .hero-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: brightness(70%);
-        transition: opacity 0.5s ease-in-out;
         opacity: 0;
+        transition: opacity 0.5s ease;
+
+        &.loaded {
+          opacity: 1;
+        }
       }
 
-      .featured-image.loaded {
-        opacity: 1;
-      }
-
-      .skeleton-loader {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .hero-skeleton {
         width: 100%;
         height: 100%;
         background: linear-gradient(
           90deg,
-          #e0e0e0 25%,
-          #f5f5f5 50%,
-          #e0e0e0 75%
+          #2a2a2a 25%,
+          #3a3a3a 50%,
+          #2a2a2a 75%
         );
         background-size: 200% 100%;
         animation: loading 1.5s infinite;
-        filter: brightness(70%);
-        z-index: 1;
       }
     }
 
-    @keyframes loading {
-      0% {
-        background-position: 0% 0%;
-      }
-      100% {
-        background-position: 100% 0%;
-      }
-    }
-
-    .overlay {
+    .hero-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.6),
-        rgba(0, 0, 0, 0.1)
+        77deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        transparent 85%
       );
       z-index: 1;
     }
 
-    .info {
-      position: absolute;
-      left: 50px;
-      bottom: 100px;
-      color: white;
-      display: flex;
-      flex-direction: column;
+    .hero-content {
+      position: relative;
       z-index: 2;
-      max-width: 50%;
+      padding: 0 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
 
-      .title {
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        animation: slideIn 1s ease-out;
+      @media (max-width: 768px) {
+        padding: 0 20px;
       }
 
-      .desc {
-        font-size: 1.1rem;
-        margin: 20px 0;
-        line-height: 1.5;
-        animation: fadeIn 1.5s ease-in-out;
-      }
+      .hero-info {
+        max-width: 500px;
 
-      .buttons {
-        display: flex;
-        gap: 10px;
+        @media (max-width: 768px) {
+          max-width: 100%;
+        }
 
-        .play {
-          background-color: #007bff;
+        .hero-title {
+          font-size: 3.5rem;
+          font-weight: 700;
           color: white;
-          width: 100px;
-          text-decoration: none;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          display: flex;
-          align-items: center;
-          font-size: 1.1rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
+          margin-bottom: 20px;
+          line-height: 1.1;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-          &:hover {
-            background-color: #0056b3;
+          @media (max-width: 768px) {
+            font-size: 2.5rem;
           }
 
-          svg {
-            margin-right: 5px;
+          @media (max-width: 480px) {
+            font-size: 2rem;
           }
         }
-      }
-    }
-  }
-}
 
-@keyframes slideIn {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+        .hero-description {
+          font-size: 1.2rem;
+          color: white;
+          line-height: 1.4;
+          margin-bottom: 30px;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@include respond-to("tablet") {
-  .home {
-    .featured {
-      .info {
-        max-width: 70%;
-
-        .title {
-          font-size: 2.5rem;
-        }
-
-        .desc {
-          font-size: 1rem;
-        }
-
-        .buttons {
-          flex-direction: column;
-
-          .play {
+          @media (max-width: 768px) {
             font-size: 1rem;
-            padding: 8px 16px;
+            margin-bottom: 25px;
+          }
+        }
+
+        .hero-actions {
+          display: flex;
+          gap: 15px;
+          align-items: center;
+
+          @media (max-width: 480px) {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .play-button {
+            background-color: white;
+            color: black;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px 32px;
+
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.8);
+            }
+
+            svg {
+              font-size: 1.5rem;
+            }
+          }
+
+          .info-button {
+            font-size: 1.1rem;
+            padding: 12px 32px;
+            font-weight: 600;
+
+            svg {
+              font-size: 1.3rem;
+            }
           }
         }
       }
     }
   }
+
+  .movie-lists {
+    position: relative;
+    z-index: 3;
+    margin-top: -150px;
+    padding-bottom: 50px;
+
+    @media (max-width: 768px) {
+      margin-top: -100px;
+    }
+  }
 }
 
-@include respond-to("phone") {
-  .home {
-    .featured {
-      height: 70vh;
-
-      .info {
-        .title {
-          font-size: 2rem;
-        }
-
-        .desc {
-          font-size: 0.9rem;
-        }
-
-        .buttons {
-          .play {
-            font-size: 0.9rem;
-            padding: 6px 12px;
-          }
-        }
-      }
-    }
+@keyframes loading {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
   }
 }

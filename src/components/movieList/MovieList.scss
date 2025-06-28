@@ -1,103 +1,129 @@
 @import "../../app.scss";
 
 .movie-list {
-  margin: 20px 0;
-  padding: 16px 40px;
+  margin-bottom: 40px;
+  padding: 0 60px;
 
-  @include respond-to("phone") {
-    padding: 4px 10px;
-    display: none;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    margin-bottom: 30px;
   }
 
-  h2 {
-    margin-left: 20px;
-    margin-bottom: 10px;
-    color: #e5e5e5; /* Lighter title color */
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 1.4rem; /* Netflix-like title size */
+  .list-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-bottom: 16px;
+    padding-left: 4px;
 
-    @include respond-to("phone") {
-      font-size: 20px;
-      margin-left: 0;
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
     }
   }
 
-  .slick-slide {
-    padding: 0 10px;
+  .slider-container {
+    position: relative;
 
-    @include respond-to("phone") {
-      padding: 0;
+    .slick-slider {
+      .slick-list {
+        overflow: visible;
+        margin: 0 -4px;
+      }
+
+      .slick-track {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .slick-slide {
+        padding: 0 4px;
+        
+        > div {
+          height: 100%;
+        }
+      }
+
+      .slick-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.9);
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        &:before {
+          content: '';
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          display: inline-block;
+          padding: 4px;
+        }
+
+        &.slick-prev {
+          left: -30px;
+          
+          &:before {
+            transform: rotate(135deg);
+            margin-left: 4px;
+          }
+        }
+
+        &.slick-next {
+          right: -30px;
+          
+          &:before {
+            transform: rotate(-45deg);
+            margin-right: 4px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          display: none !important;
+        }
+      }
     }
-  }
 
-  .slick-prev,
-  .slick-next {
-    z-index: 1;
-    width: 50px;
-    height: 100px;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-
-    &:before {
-      font-size: 30px;
-      color: #fff; /* White arrows */
-      opacity: 0.7;
+    .movie-slide {
+      height: auto;
     }
-    &:hover:before {
-      opacity: 1;
-    }
-  }
-
-  .slick-prev {
-    left: -40px; /* Adjusted position */
-  }
-  .slick-next {
-    right: -40px; /* Adjusted position */
   }
 }
 
-.movie-list-phone {
-  padding: 4px 10px;
-  margin-top: 20px;
-  display: none;
+// Custom arrow styles
+.slick-prev,
+.slick-next {
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  background: transparent;
+}
 
-  &.related {
-    margin-top: 0;
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+  color: transparent;
+  outline: none;
+  background: transparent;
+}
 
-    .movies-phone {
-      margin: 0;
-    }
-  }
-
-  @include respond-to("phone") {
-    display: block;
-  }
-
-  h2 {
-    color: #e5e5e5; /* Lighter title color for mobile */
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .movies-phone {
-    margin: 4px 10px;
-    display: flex;
-    gap: 10px;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  .phoneMovieImg {
-    width: 100px;
-    height: 140px;
-    border-radius: 8px;
-  }
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before {
+  opacity: 1;
 }

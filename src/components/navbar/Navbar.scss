@@ -1,12 +1,21 @@
 @import "../../responsive.scss";
 
 .navbar {
-  background-color: #141414; /* Match body background or make it slightly different if needed */
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, transparent);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   padding: 16px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #333; /* Darker border */
+  transition: background-color 0.3s ease;
+
+  &.scrolled {
+    background-color: #141414;
+  }
 
   @include sm {
     padding: 8px 20px;
@@ -21,8 +30,9 @@
       .navbar-title {
         font-size: 1.8rem;
         font-weight: bold;
-        color: #e50914; /* Netflix red for brand */
+        color: #e50914;
         letter-spacing: 1px;
+        text-decoration: none;
       }
     }
 
@@ -41,20 +51,19 @@
 
         .navbar-link {
           text-decoration: none;
-          color: #e5e5e5; /* Lighter text for links */
+          color: #e5e5e5;
           transition: color 0.3s ease;
-          text-transform: uppercase;
           white-space: nowrap;
           font-size: 0.9rem;
-          font-weight: 500;
+          font-weight: 400;
 
           &:hover {
-            color: #b3b3b3; /* Slightly darker on hover */
+            color: #b3b3b3;
           }
 
           &.active {
-            color: #ffffff; /* White for active link */
-            font-weight: bold;
+            color: #ffffff;
+            font-weight: 500;
           }
         }
       }
@@ -64,11 +73,11 @@
   .right-menu {
     display: flex;
     align-items: center;
-    gap: 20px; // Space between search, auth links, and menu icon
+    gap: 20px;
 
     .search-desktop {
       @include md {
-        display: none; // Hide desktop search on medium screens where mobile menu icon appears
+        display: none;
       }
     }
 
@@ -78,26 +87,26 @@
       align-items: center;
       margin: 0;
       padding: 0;
-      gap: 15px; // Space between auth links
+      gap: 15px;
 
       @include md {
-        display: none; // Hide auth links here for medium screens, they'll be in the mobile slide-out
+        display: none;
       }
 
       .navbar-item {
-        margin-right: 0; // Remove default margin-right as gap is used
+        margin-right: 0;
       }
     }
   }
 
   .icon {
     display: none;
-    color: #e5e5e5; /* Lighter icon color */
+    color: #e5e5e5;
     cursor: pointer;
     z-index: 3000;
 
     @include md {
-      display: block; // Show menu icon on medium screens
+      display: block;
     }
 
     svg {
@@ -106,25 +115,16 @@
     }
   }
 
-  // Remove the old .search rule as it's now .search-desktop inside .right-menu
-  // .search {
-  //   @include md {
-  //     display: none;
-  //   }
-  // }
-
-  // Button styles
   .navbar-button {
     background-color: transparent;
     color: #e5e5e5;
     padding: 8px 16px;
-    border: 1px solid transparent; // For alignment, can be made visible if needed
+    border: 1px solid transparent;
     border-radius: 4px;
     text-decoration: none;
     cursor: pointer;
     font-size: 0.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
+    font-weight: 400;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -135,50 +135,46 @@
     }
 
     &.signup-button {
-      background-color: #e50914; // Netflix red
+      background-color: #e50914;
       color: #ffffff;
       border-color: #e50914;
       &:hover {
-        background-color: #f6121d; // Darker red on hover
+        background-color: #f6121d;
         border-color: #f6121d;
       }
     }
 
     &.logout-button {
-      // Can add specific styles for logout if different from default navbar-link
-      // For now, it will inherit general navbar-link look if used as <button class="navbar-link">
-      // Or, if it's a button styled like a link:
-      padding: 0; // Reset padding if it's meant to look exactly like a link
+      padding: 0;
       border: none;
       svg {
-        font-size: 1.2rem; // Adjust icon size if needed
-      }
-      &:hover {
-        // color: #b3b3b3;
+        font-size: 1.2rem;
       }
     }
   }
 }
 
 .mobile {
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  padding: 16px 40px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background-color: #141414;
+  border-bottom: 1px solid #333;
   display: none;
-  padding: 0 40px;
+  flex-direction: column;
+  padding: 20px;
+  z-index: 999;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
 
   &.active {
-    max-height: 500px;
-    border-bottom: 1px solid #333; /* Darker border for mobile menu */
-    background-color: #141414; /* Ensure mobile menu has dark background */
     display: flex;
+    transform: translateY(0);
   }
 
-  padding: 0 20px;
-
   .mobile-search {
-    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .navbar-menu {
@@ -186,48 +182,47 @@
     display: flex;
     flex-direction: column;
     margin: 0;
-    padding: 10px 0;
+    padding: 0;
 
     .navbar-item {
-      margin-right: 1.5rem;
-      padding: 6px 0;
+      margin-bottom: 15px;
 
       .navbar-link {
         text-decoration: none;
-        transition: color 0.3s ease;
-        text-transform: uppercase;
-        white-space: nowrap;
-        color: #e5e5e5; /* Lighter text for mobile links */
-        font-weight: bold;
-        letter-spacing: 1.1px;
+        color: #e5e5e5;
+        font-weight: 400;
+        font-size: 1rem;
         padding: 10px 0;
-        display: flex; // For aligning icons in mobile if any
+        display: flex;
         align-items: center;
+        transition: color 0.3s ease;
 
         &:hover {
-          color: #b3b3b3; /* Slightly darker on hover */
+          color: #b3b3b3;
         }
 
         &.active {
-          color: #ffffff; /* White for active link */
+          color: #ffffff;
+          font-weight: 500;
         }
 
-        svg { // For icons next to links in mobile if any (like profile)
-            margin-right: 8px;
+        svg {
+          margin-right: 8px;
         }
       }
 
-      // Ensure mobile buttons also get styled
       .navbar-button {
-        width: 100%; // Make buttons full width in mobile menu
-        justify-content: flex-start; // Align text to left
-        padding: 10px 0; // Match link padding
-        margin-top: 5px;
-        margin-bottom: 5px;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 10px 0;
+        margin: 0;
 
         &.signup-button {
-          margin-left: 0; // Override potential desktop margin
+          margin-top: 10px;
+          justify-content: center;
+          padding: 12px 24px;
         }
+
         &.logout-button {
           color: #e5e5e5;
           background: transparent;
@@ -239,4 +234,9 @@
       }
     }
   }
+}
+
+// Add scroll effect
+.navbar.scrolled {
+  background-color: #141414;
 }

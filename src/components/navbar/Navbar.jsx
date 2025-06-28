@@ -3,44 +3,41 @@ import SearchBar from "../searchBar/SearchBar";
 import "./Navbar.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'; // Placeholder for profile
-import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // For logout
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../redux/authSlice"; // Import logoutUser thunk
+import { useAuth } from "../../hooks/useAuth";
 
 function Navbar() {
   const [openIcon, setOpenIcon] = useState(false);
   const menuRef = useRef(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { user, signOut } = useAuth();
 
   const handleLinkClick = () => {
     setOpenIcon(false);
   };
 
-  const handleLogout = () => {
-    dispatch(logoutUser()); // Dispatch the thunk
-    handleLinkClick(); // Close mobile menu if open
-    navigate("/"); // Redirect to home after logout
+  const handleLogout = async () => {
+    await signOut();
+    handleLinkClick();
+    navigate("/");
   };
 
   const renderAuthLinks = () => {
-    if (isAuthenticated) {
+    if (user) {
       return (
         <>
           <li className="navbar-item">
-            {/* Placeholder Profile Link */}
             <NavLink to="/profile" className="navbar-link" onClick={handleLinkClick}>
               <AccountCircleIcon style={{ verticalAlign: 'middle', marginRight: '5px' }} />
-              {/* {user?.email ? user.email.split('@')[0] : 'Profile'} */}
+              Profile
             </NavLink>
           </li>
           <li className="navbar-item">
             <button onClick={handleLogout} className="navbar-button logout-button">
               <ExitToAppIcon style={{ verticalAlign: 'middle', marginRight: '5px' }} />
-              Logout
+              Sign Out
             </button>
           </li>
         </>
@@ -56,13 +53,13 @@ function Navbar() {
               }
               onClick={handleLinkClick}
             >
-              Login
+              Sign In
             </NavLink>
           </li>
           <li className="navbar-item">
             <NavLink
               to="/signup"
-              className="navbar-button signup-button" // Style as a button
+              className="navbar-button signup-button"
               onClick={handleLinkClick}
             >
               Sign Up
@@ -79,7 +76,7 @@ function Navbar() {
         <div className={openIcon ? "left icon-open" : "left"}>
           <div className="navbar-brand">
             <NavLink to="/" onClick={handleLinkClick}>
-              <span className="navbar-title">LOGO</span> {/* Make logo a NavLink to home */}
+              <span className="navbar-title">FLICKNEST</span>
             </NavLink>
           </div>
           <ul className="navbar-menu">
@@ -94,7 +91,7 @@ function Navbar() {
                 Home
               </NavLink>
             </li>
-            {isAuthenticated && ( // Only show these if authenticated
+            {user && (
               <>
                 <li className="navbar-item">
                   <NavLink
@@ -104,7 +101,7 @@ function Navbar() {
                     }
                     onClick={handleLinkClick}
                   >
-                    Movie Categories
+                    Movies
                   </NavLink>
                 </li>
                 <li className="navbar-item">
@@ -123,19 +120,19 @@ function Navbar() {
           </ul>
         </div>
         <div className="right-menu">
-           <div className="search-desktop"> {/* Show search bar here for desktop */}
-             <SearchBar handleLinkClick={handleLinkClick} />
-           </div>
-          <ul className="navbar-menu auth-links"> {/* Separate ul for auth links for better layout control */}
+          <div className="search-desktop">
+            <SearchBar handleLinkClick={handleLinkClick} />
+          </div>
+          <ul className="navbar-menu auth-links">
             {renderAuthLinks()}
           </ul>
           <div className="icon" onClick={() => setOpenIcon(!openIcon)}>
             {openIcon ? <CloseIcon /> : <MenuIcon />}
           </div>
         </div>
-
       </nav>
-      {/* mobile */}
+
+      {/* Mobile menu */}
       <div className={`mobile ${openIcon ? "active" : ""}`}>
         <div className="mobile-search">
           <SearchBar handleLinkClick={handleLinkClick} />
@@ -152,7 +149,7 @@ function Navbar() {
               Home
             </NavLink>
           </li>
-          {isAuthenticated && (
+          {user && (
             <>
               <li className="navbar-item">
                 <NavLink
@@ -162,7 +159,7 @@ function Navbar() {
                   }
                   onClick={handleLinkClick}
                 >
-                  Movie Categories
+                  Movies
                 </NavLink>
               </li>
               <li className="navbar-item">
@@ -178,7 +175,6 @@ function Navbar() {
               </li>
             </>
           )}
-          {/* Render auth links in mobile menu */}
           {renderAuthLinks()}
         </ul>
       </div>
